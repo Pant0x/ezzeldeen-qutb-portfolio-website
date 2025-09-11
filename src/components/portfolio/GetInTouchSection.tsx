@@ -22,7 +22,12 @@ export function GetInTouchSection() {
     e.preventDefault()
     setStatus('sending'); setError('')
     try {
-      const res = await fetch('/api/send-email', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
+      // Use Netlify function endpoint
+      const res = await fetch('/.netlify/functions/send-email', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(form) 
+      })
       if (!res.ok) {
         let msg = 'Failed to send'
         try { const data = await res.json(); if (data?.error) msg = data.error } catch {}
