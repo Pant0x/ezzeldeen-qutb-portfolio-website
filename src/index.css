@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pixel Art Portfolio Design System - Retro Terminal & 8-bit Aesthetics */
+
+@layer base {
+  :root {
+    /* Light mode - Neon Cyber Theme */
+    --background: 240 15% 95%;           /* Light cyber background */
+    --foreground: 250 80% 15%;           /* Dark purple text */
+
+    --card: 0 0% 98%;                   /* Light cards */
+    --card-foreground: 250 80% 15%;
+
+    --popover: 0 0% 98%;
+    --popover-foreground: 250 80% 15%;
+
+    --primary: 260 100% 65%;            /* Neon purple */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 100% 75%;          /* Neon blue */
+    --secondary-foreground: 220 100% 15%;
+
+    --muted: 240 15% 90%;               /* Light muted */
+    --muted-foreground: 250 30% 45%;
+
+    --accent: 200 100% 70%;             /* Cyan accent */
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 100% 60%;          /* Error red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 260 80% 50%;              /* Purple borders */
+    --input: 240 15% 90%;
+    --ring: 260 100% 65%;
+
+    /* Pixel art styling */
+    --radius: 0px;                      /* Sharp corners for pixel art */
+    --pixel-border: 2px solid hsl(var(--border));
+    
+    /* Neon colors */
+    --neon-blue: 220 100% 60%;          /* Electric blue */
+    --neon-purple: 260 100% 65%;        /* Electric purple */
+    --neon-cyan: 180 100% 60%;          /* Electric cyan */
+    --neon-pink: 320 100% 70%;          /* Electric pink */
+    --terminal-green: 120 100% 50%;     /* Matrix green */
+    
+    /* Enhanced gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-purple)));
+    --gradient-cyber: linear-gradient(90deg, hsl(var(--neon-cyan)), hsl(var(--neon-pink)));
+    --gradient-matrix: linear-gradient(180deg, hsl(var(--terminal-green) / 0.8), hsl(var(--neon-blue) / 0.6));
+    
+    /* Enhanced shadows */
+    --pixel-shadow: 4px 4px 0px hsl(var(--border));
+    --neon-glow: 0 0 20px hsl(var(--neon-purple) / 0.5);
+    --cyber-glow: 0 0 30px hsl(var(--neon-blue) / 0.4);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode - Neon Cyberpunk */
+    --background: 240 100% 3%;          /* Deep cyber black */
+    --foreground: 200 100% 85%;         /* Bright cyan text */
+
+    --card: 240 50% 8%;                 /* Dark cyber cards */
+    --card-foreground: 200 100% 85%;
+
+    --popover: 240 50% 8%;
+    --popover-foreground: 200 100% 85%;
+
+    --primary: 260 100% 70%;            /* Bright neon purple */
+    --primary-foreground: 0 0% 8%;
+
+    --secondary: 220 100% 65%;          /* Bright neon blue */
+    --secondary-foreground: 220 100% 10%;
+
+    --muted: 240 30% 12%;               /* Dark muted */
+    --muted-foreground: 200 50% 65%;
+
+    --accent: 180 100% 65%;             /* Bright cyan */
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 100% 60%;          /* Neon red */
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 260 80% 60%;              /* Glowing purple borders */
+    --input: 240 30% 12%;
+    --ring: 260 100% 70%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    cursor: none !important; /* hide system cursor */
+  }
+
+  html, button, a, input, textarea, select {
+    cursor: none !important; /* ensure hidden across interactive elements */
+  }
+}
+
+@layer components {
+  /* Neon Cyber Components */
+  .pixel-border {
+    border: var(--pixel-border);
+  }
+  
+  .pixel-button {
+    @apply pixel-border bg-primary text-primary-foreground font-mono font-bold px-4 py-2 transition-all duration-75;
+    box-shadow: var(--pixel-shadow);
+  }
+  
+  .pixel-button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px hsl(var(--border));
+  }
+  
+  .pixel-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+  }
+  
+  .terminal-text {
+    @apply font-mono text-primary;
+    text-shadow: 0 0 15px hsl(var(--neon-purple) / 0.6);
+  }
+  
+  .neon-text {
+    @apply font-mono;
+    text-shadow: 
+      0 0 5px hsl(var(--neon-blue)),
+      0 0 10px hsl(var(--neon-blue)),
+      0 0 15px hsl(var(--neon-blue)),
+      0 0 20px hsl(var(--neon-purple));
+  }
+  
+  .cyber-text {
+    @apply font-mono;
+    text-shadow: 
+      0 0 5px hsl(var(--neon-cyan)),
+      0 0 10px hsl(var(--neon-cyan));
+  }
+  
+  .pixel-card {
+    @apply pixel-border bg-card p-6;
+    box-shadow: var(--pixel-shadow);
+  }
+  
+  .neon-card {
+    @apply pixel-border bg-card/90 p-6 backdrop-blur-sm;
+    box-shadow: 
+      var(--pixel-shadow),
+      inset 0 0 20px hsl(var(--neon-blue) / 0.1);
+  }
+  
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      transparent 50%,
+      hsl(var(--foreground) / 0.03) 51%
+    );
+    background-size: 1px 4px;
+    pointer-events: none;
+  }
+  
+  .code-highlight {
+    @apply bg-secondary/20 px-1 rounded-none border border-secondary;
+    text-shadow: 0 0 8px hsl(var(--neon-blue) / 0.4);
+  }
+  
+  .ascii-art {
+    @apply font-mono text-xs leading-none;
+    font-family: 'Courier New', monospace;
+    white-space: pre;
+  }
+  
+  .matrix-rain {
+    @apply text-terminal-green;
+    animation: matrix-drop 2s linear infinite;
+  }
+  
+  @keyframes matrix-drop {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  
+  .neon-pulse {
+    animation: neon-pulse 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes neon-pulse {
+    from {
+      text-shadow: 
+        0 0 5px hsl(var(--neon-blue)),
+        0 0 10px hsl(var(--neon-blue)),
+        0 0 15px hsl(var(--neon-blue));
+    }
+    to {
+      text-shadow: 
+        0 0 8px hsl(var(--neon-purple)),
+        0 0 16px hsl(var(--neon-purple)),
+        0 0 24px hsl(var(--neon-purple));
+    }
+  }
+  
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}

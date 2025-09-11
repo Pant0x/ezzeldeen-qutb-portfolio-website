@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ezzeldeen Qutb Portfolio</title>
+    <meta name="description" content="Portfolio of Ezzeldeen Qutb – AI & ML Engineer specializing in Computer Vision and intelligent systems." />
+    <meta name="author" content="Ezzeldeen Qutb" />
+    
+    <!-- Robot emoji favicon - same as main site -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Ctext y='50%' x='50%' dominant-baseline='middle' text-anchor='middle' font-size='56'%3E🤖%3C/text%3E%3C/svg%3E" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Ctext y='50%' x='50%' dominant-baseline='middle' text-anchor='middle' font-size='56'%3E🤖%3C/text%3E%3C/svg%3E" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0a0a0f;
+        font-family: 'Courier New', monospace;
+        overflow: hidden;
+      }
+      
+      .pdf-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .header {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        border-bottom: 2px solid #9333ea;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+      }
+      
+      .header h1 {
+        color: #00ffff;
+        font-size: 16px;
+        margin: 0;
+        text-shadow: 0 0 10px #00ffff;
+      }
+      
+      .emoji {
+        font-size: 20px;
+        animation: pulse 2s infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      
+      .pdf-frame {
+        flex: 1;
+        border: none;
+        background: white;
+      }
+      
+      .fallback {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #00ffff;
+        text-align: center;
+        background: #0a0a0f;
+      }
+      
+      .download-btn {
+        background: #9333ea;
+        color: white;
+        border: 2px solid #00ffff;
+        padding: 12px 24px;
+        font-family: inherit;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 16px;
+        transition: all 0.3s ease;
+      }
+      
+      .download-btn:hover {
+        background: #00ffff;
+        color: #0a0a0f;
+        box-shadow: 0 0 20px #00ffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pdf-container">
+      <div class="header">
+        <span class="emoji">🤖</span>
+        <h1>EZZELDEEN QUTB - AI/ML PORTFOLIO</h1>
+      </div>
+      
+      <object 
+        data="./portfolio.pdf" 
+        type="application/pdf" 
+        class="pdf-frame"
+        title="Ezzeldeen Qutb Portfolio"
+      >
+        <embed 
+          src="./portfolio.pdf" 
+          type="application/pdf" 
+          class="pdf-frame"
+        />
+        <div class="fallback">
+          <div>
+            <h2>📂 Portfolio Viewer</h2>
+            <p>PDF viewer not supported in this browser.</p>
+            <a href="./portfolio.pdf" download="Ezzeldeen_Qutb_Portfolio.pdf" class="download-btn">
+              📥 Download Portfolio PDF
+            </a>
+          </div>
+        </div>
+      </object>
+    </div>
+  </body>
+</html>
