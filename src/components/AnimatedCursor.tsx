@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Check if device supports hover (desktop/laptop)
-const hasHover = () => {
+// Determine if we should show custom cursor.
+// Some desktop browsers/devices may report no hover; add width + pointer checks.
+const detectDesktop = () => {
   if (typeof window === 'undefined') return false
-  return window.matchMedia('(hover: hover)').matches
+  const mqHover = window.matchMedia('(hover: hover)').matches
+  const mqFinePointer = window.matchMedia('(pointer: fine)').matches
+  const wide = window.innerWidth >= 768
+  return (mqHover || mqFinePointer || wide)
 }
 
 // Lightweight custom cursor with trailing glow (desktop only)
@@ -22,8 +26,13 @@ export const AnimatedCursor = () => {
 
   useEffect(() => {
     // Only run on client side
-    setIsDesktop(hasHover())
+    const desktop = detectDesktop()
+    setIsDesktop(desktop)
     setIsReady(true)
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.log('[AnimatedCursor] init', { desktop, width: typeof window!== 'undefined' ? window.innerWidth : 'NA' })
+    }
     
     // Set initial position safely
     if (typeof window !== 'undefined') {
@@ -112,11 +121,11 @@ export const AnimatedCursor = () => {
     <>
       <div
         ref={dotRef}
-        className={`pointer-events-none fixed top-0 left-0 z-[100] ${sizeClass} -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform ${dotColor}`}
+        className={`pointer-events-none fixed top-0 left-0 z-[100] ${sizeClass} -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform ${dotColor} border border-white/30`}
       />
       <div
         ref={glowRef}
-        className={`pointer-events-none fixed top-0 left-0 z-[90] ${glowColor} rounded-full blur-2xl will-change-transform transition-[scale,opacity] duration-150`}
+        className={`pointer-events-none fixed top-0 left-0 z-[90] ${glowColor} rounded-full blur-2xl will-change-transform transition-[scale,opacity] duration-150 outline outline-1 outline-neon-purple/40`}
       />
     </>
   )
