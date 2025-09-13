@@ -124,11 +124,18 @@
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
-    cursor: none !important; /* hide system cursor */
+    /* Default: show system cursor. We'll hide it only when custom cursor mounts. */
   }
 
-  html, button, a, input, textarea, select {
-    cursor: none !important; /* ensure hidden across interactive elements */
+  /* Only hide when custom cursor is active */
+  body.custom-cursor-active, 
+  body.custom-cursor-active html, 
+  body.custom-cursor-active button, 
+  body.custom-cursor-active a, 
+  body.custom-cursor-active input, 
+  body.custom-cursor-active textarea, 
+  body.custom-cursor-active select {
+    cursor: none !important;
   }
 }
 

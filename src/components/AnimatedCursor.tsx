@@ -25,24 +25,33 @@ export const AnimatedCursor = () => {
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    // Only run on client side
-    const desktop = detectDesktop()
-    setIsDesktop(desktop)
-    setIsReady(true)
-    if (import.meta.env.DEV) {
-      // eslint-disable-next-line no-console
-      console.log('[AnimatedCursor] init', { desktop, width: typeof window!== 'undefined' ? window.innerWidth : 'NA' })
+    const init = () => {
+      const desktop = detectDesktop()
+      setIsDesktop(desktop)
+      setIsReady(true)
+      if (desktop) {
+        document.body.classList.add('custom-cursor-active')
+      } else {
+        document.body.classList.remove('custom-cursor-active')
+      }
+      if (import.meta.env.DEV) {
+        // eslint-disable-next-line no-console
+        console.log('[AnimatedCursor] init', { desktop, width: typeof window!== 'undefined' ? window.innerWidth : 'NA' })
+      }
+      if (typeof window !== 'undefined') {
+        pos.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+        target.current = { x: pos.current.x, y: pos.current.y }
+      }
+      if (typeof document !== 'undefined') {
+        setIsDark(document.documentElement.classList.contains('dark'))
+      }
     }
-    
-    // Set initial position safely
-    if (typeof window !== 'undefined') {
-      pos.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
-      target.current = { x: pos.current.x, y: pos.current.y }
-    }
-    
-    // Check theme safely
-    if (typeof document !== 'undefined') {
-      setIsDark(document.documentElement.classList.contains('dark'))
+    init()
+    const handleResize = () => init()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      document.body.classList.remove('custom-cursor-active')
     }
   }, [])
 
