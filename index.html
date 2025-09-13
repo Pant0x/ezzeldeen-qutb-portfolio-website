@@ -45,21 +45,5 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
-  
-  <!-- EMERGENCY CURSOR BACKUP -->
-  <script>
-    // Hide system cursor and show custom one IMMEDIATELY
-    document.addEventListener('DOMContentLoaded', function() {
-      document.body.style.cursor = 'none';
-      const cursor = document.getElementById('emergency-cursor');
-      if (cursor) {
-        document.addEventListener('mousemove', (e) => {
-          cursor.style.left = e.clientX + 'px';
-          cursor.style.top = e.clientY + 'px';
-        });
-        console.log('[EMERGENCY] Emergency cursor activated!');
-      }
-    });
-  </script>
 </body>
 </html>
