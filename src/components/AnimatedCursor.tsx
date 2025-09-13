@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
 // Check if device supports hover (desktop/laptop)
-const hasHover = () => window.matchMedia('(hover: hover)').matches
+const hasHover = () => {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(hover: hover)').matches
+}
 
 // Lightweight custom cursor with trailing glow (desktop only)
 export const AnimatedCursor = () => {
@@ -9,12 +12,15 @@ export const AnimatedCursor = () => {
   const dotRef = useRef<HTMLDivElement | null>(null)
   const glowRef = useRef<HTMLDivElement | null>(null)
   const raf = useRef<number>()
-  const pos = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
+  const pos = useRef({ x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0, y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0 })
   const target = useRef({ x: pos.current.x, y: pos.current.y })
   const clicking = useRef(false)
   const scale = useRef(1)
   const scaleTarget = useRef(1)
-  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'))
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof document === 'undefined') return false
+    return document.documentElement.classList.contains('dark')
+  })
 
   useEffect(() => {
     setIsDesktop(hasHover())
