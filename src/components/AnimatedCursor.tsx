@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Lightweight custom cursor with trailing glow
+// Check if device supports hover (desktop/laptop)
+const hasHover = () => window.matchMedia('(hover: hover)').matches
+
+// Lightweight custom cursor with trailing glow (desktop only)
 export const AnimatedCursor = () => {
+  const [isDesktop, setIsDesktop] = useState(false)
   const dotRef = useRef<HTMLDivElement | null>(null)
   const glowRef = useRef<HTMLDivElement | null>(null)
   const raf = useRef<number>()
@@ -11,6 +15,13 @@ export const AnimatedCursor = () => {
   const scale = useRef(1)
   const scaleTarget = useRef(1)
   const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'))
+
+  useEffect(() => {
+    setIsDesktop(hasHover())
+  }, [])
+
+  // Don't render cursor on mobile/touch devices
+  if (!isDesktop) return null
 
   useEffect(() => {
     const move = (e: MouseEvent) => {

@@ -12,7 +12,7 @@ export function CustomResumeViewer({ isOpen, onClose, pdfUrl, title = "Resume" }
   const [isLoading, setIsLoading] = useState(true)
   const [zoomLevel, setZoomLevel] = useState(100)
 
-  // Handle Escape key to close popup
+  // Handle Escape key to close popup (desktop only)
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isOpen) {
@@ -21,7 +21,10 @@ export function CustomResumeViewer({ isOpen, onClose, pdfUrl, title = "Resume" }
     }
 
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown)
+      // Only enable keyboard shortcuts on devices with hover support (desktop)
+      if (window.matchMedia('(hover: hover)').matches) {
+        document.addEventListener('keydown', handleKeyDown)
+      }
       document.body.style.overflow = 'hidden'
       setIsLoading(true)
       setZoomLevel(100)
