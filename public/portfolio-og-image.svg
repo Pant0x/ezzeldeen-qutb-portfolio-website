@@ -1,0 +1,66 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .bg { fill: url(#gradient); }
+      .terminal { fill: rgba(0,0,0,0.8); stroke: #00f5ff; stroke-width: 2; }
+      .title { fill: #00f5ff; font-family: 'Courier New', monospace; font-size: 48px; font-weight: bold; text-anchor: middle; }
+      .subtitle { fill: #ffffff; font-family: 'Courier New', monospace; font-size: 24px; text-anchor: middle; }
+      .desc { fill: #00ff88; font-family: 'Courier New', monospace; font-size: 16px; text-anchor: middle; }
+      .cmd { fill: #00ff88; font-family: 'Courier New', monospace; font-size: 14px; }
+      .btn { fill: #00ff88; font-family: 'Courier New', monospace; font-size: 14px; text-anchor: middle; }
+      .btn-bg { fill: #00ff88; }
+      .btn-outline { fill: none; stroke: #ffffff; stroke-width: 2; }
+      .btn-outline-text { fill: #ffffff; font-family: 'Courier New', monospace; font-size: 14px; text-anchor: middle; }
+    </style>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" class="bg"/>
+  
+  <!-- Terminal Window -->
+  <rect x="100" y="80" width="1000" height="470" rx="8" class="terminal"/>
+  
+  <!-- Terminal Header -->
+  <text x="120" y="110" class="cmd">ezzeldeen@ai-portfolio:~$ whoami</text>
+  
+  <!-- Main Title -->
+  <text x="600" y="180" class="title">EZZELDEEN QUTB</text>
+  
+  <!-- Subtitle -->
+  <rect x="450" y="200" width="300" height="40" fill="#00f5ff"/>
+  <text x="600" y="225" class="subtitle" fill="#000">AI AND ML ENGINEER</text>
+  
+  <!-- Description -->
+  <text x="600" y="280" class="desc">Building intelligent systems that can see, understand, and act on visual data</text>
+  <text x="600" y="305" class="desc">bridging the gap between data and solutions with AI &amp; Machine Learning</text>
+  
+  <!-- Buttons -->
+  <rect x="400" y="340" width="140" height="40" class="btn-bg"/>
+  <text x="470" y="365" class="btn" fill="#000">View Portfolio</text>
+  
+  <rect x="560" y="340" width="120" height="40" class="btn-outline"/>
+  <text x="620" y="365" class="btn-outline-text">View Resume</text>
+  
+  <!-- Social Buttons -->
+  <rect x="450" y="400" width="80" height="30" fill="none" stroke="#00f5ff" stroke-width="2"/>
+  <text x="490" y="420" class="desc" font-size="12">GitHub</text>
+  
+  <rect x="540" y="400" width="80" height="30" fill="none" stroke="#00f5ff" stroke-width="2"/>
+  <text x="580" y="420" class="desc" font-size="12">LinkedIn</text>
+  
+  <rect x="630" y="400" width="90" height="30" fill="none" stroke="#00f5ff" stroke-width="2"/>
+  <text x="675" y="420" class="desc" font-size="12">Instagram</text>
+  
+  <!-- Footer -->
+  <text x="600" y="480" class="desc" font-size="12" fill="#666">→ Press any key to enter the matrix...</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="150" cy="150" r="2" fill="#00f5ff" opacity="0.6"/>
+  <circle cx="1050" cy="200" r="2" fill="#00ff88" opacity="0.6"/>
+  <circle cx="180" cy="450" r="2" fill="#00f5ff" opacity="0.6"/>
+  <circle cx="1020" cy="480" r="2" fill="#00ff88" opacity="0.6"/>
+</svg>
