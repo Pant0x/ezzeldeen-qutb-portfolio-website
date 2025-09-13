@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: #000;
+            color: #fff;
+        }
+        
+        .cursor-info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: #0ff;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            z-index: 1000;
+        }
+        
+        .test-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background: #0ff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px #0ff;
+        }
+        
+        body.hide-cursor,
+        body.hide-cursor * {
+            cursor: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-info" id="cursorInfo">
+        Loading cursor test...
+    </div>
+    
+    <div class="test-cursor" id="testCursor"></div>
+    
+    <h1>Cursor Detection Test</h1>
+    <p>Move your mouse around to test the custom cursor.</p>
+    <button onclick="alert('Button clicked!')">Test Button</button>
+    <a href="#" onclick="alert('Link clicked!'); return false;">Test Link</a>
+    
+    <script>
+        // Test the same detection logic as your cursor
+        function detectDesktop() {
+            if (typeof window === 'undefined') return false;
+            const mqHover = window.matchMedia('(hover: hover)').matches;
+            const mqFinePointer = window.matchMedia('(pointer: fine)').matches;
+            const wide = window.innerWidth >= 768;
+            return (mqHover || mqFinePointer || wide);
+        }
+        
+        const cursor = document.getElementById('testCursor');
+        const info = document.getElementById('cursorInfo');
+        
+        function updateInfo() {
+            const hover = window.matchMedia('(hover: hover)').matches;
+            const fine = window.matchMedia('(pointer: fine)').matches;
+            const width = window.innerWidth;
+            const desktop = detectDesktop();
+            
+            info.innerHTML = `
+                Hover capability: ${hover}<br>
+                Fine pointer: ${fine}<br>
+                Window width: ${width}px<br>
+                Width >= 768: ${width >= 768}<br>
+                Desktop detected: ${desktop}<br>
+                User agent: ${navigator.userAgent.substring(0, 50)}...
+            `;
+            
+            if (desktop) {
+                document.body.classList.add('hide-cursor');
+                cursor.style.display = 'block';
+            } else {
+                document.body.classList.remove('hide-cursor');
+                cursor.style.display = 'none';
+            }
+        }
+        
+        // Update cursor position
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        // Initial check
+        updateInfo();
+        
+        // Check on resize
+        window.addEventListener('resize', updateInfo);
+        
+        console.log('Cursor test initialized');
+        console.log('Desktop detected:', detectDesktop());
+    </script>
+</body>
+</html>

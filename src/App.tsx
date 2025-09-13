@@ -23,9 +23,23 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
       <TooltipProvider>
-        <SafeBoundary>
-          <AnimatedCursor />
-        </SafeBoundary>
+        {/* DIRECT CURSOR - NO SAFE BOUNDARY */}
+        <AnimatedCursor />
+        {/* EMERGENCY BACKUP CURSOR - PURE CSS */}
+        <div 
+          id="emergency-cursor"
+          style={{
+            position: 'fixed',
+            width: '20px',
+            height: '20px',
+            background: 'red',
+            borderRadius: '50%',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            transform: 'translate(-50%, -50%)',
+            boxShadow: '0 0 20px red'
+          }}
+        />
         <Toaster />
         <Sonner />
         <BrowserRouter>
