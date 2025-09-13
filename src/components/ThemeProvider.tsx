@@ -26,9 +26,18 @@ export function ThemeProvider({
   storageKey = "ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  )
+  const [theme, setTheme] = useState<Theme>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const stored = window.localStorage.getItem(storageKey) as Theme | null
+        if (stored === 'light' || stored === 'dark' || stored === 'system') return stored
+      }
+    } catch (e) {
+      // Access to localStorage might be blocked (privacy mode); fall back silently
+      console.warn('[ThemeProvider] localStorage unavailable, using default theme')
+    }
+    return defaultTheme
+  })
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -51,7 +60,11 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
+      try {
+        window.localStorage.setItem(storageKey, theme)
+      } catch {
+        // ignore write errors
+      }
       setTheme(theme)
     },
   }
