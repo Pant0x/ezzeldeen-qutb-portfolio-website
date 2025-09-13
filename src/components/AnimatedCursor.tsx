@@ -27,6 +27,9 @@ export const AnimatedCursor = () => {
 
   useEffect(() => {
     const init = () => {
+      const hover = window.matchMedia('(hover: hover)').matches
+      const fine = window.matchMedia('(pointer: fine)').matches
+      const wide = window.innerWidth >= 768
       const desktop = detectDesktop()
       setIsDesktop(desktop)
       setIsReady(true)
@@ -35,10 +38,15 @@ export const AnimatedCursor = () => {
       } else {
         document.body.classList.remove('custom-cursor-active')
       }
-      if (import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
-        console.log('[AnimatedCursor] init', { desktop, width: typeof window!== 'undefined' ? window.innerWidth : 'NA' })
-      }
+      // Always log for debugging (not just DEV mode)
+      console.log('[AnimatedCursor] init', { 
+        desktop, 
+        hover, 
+        fine, 
+        wide, 
+        width: window.innerWidth,
+        userAgent: navigator.userAgent.substring(0, 60)
+      })
       if (typeof window !== 'undefined') {
         pos.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
         target.current = { x: pos.current.x, y: pos.current.y }
@@ -57,7 +65,16 @@ export const AnimatedCursor = () => {
   }, [])
 
   // Don't render cursor on mobile/touch devices or before ready
-  if (!isReady || !isDesktop) return null
+  if (!isReady) {
+    console.log('[AnimatedCursor] not ready yet')
+    return null
+  }
+  if (!isDesktop) {
+    console.log('[AnimatedCursor] not desktop, hiding cursor')
+    return null
+  }
+  
+  console.log('[AnimatedCursor] rendering cursor elements')
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
