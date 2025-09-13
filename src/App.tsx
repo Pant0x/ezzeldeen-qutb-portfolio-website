@@ -14,6 +14,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
       <TooltipProvider>
+        <AnimatedCursor />
         <Toaster />
         <Sonner />
         <BrowserRouter>

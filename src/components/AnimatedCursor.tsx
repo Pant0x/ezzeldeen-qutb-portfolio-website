@@ -9,25 +9,36 @@ const hasHover = () => {
 // Lightweight custom cursor with trailing glow (desktop only)
 export const AnimatedCursor = () => {
   const [isDesktop, setIsDesktop] = useState(false)
+  const [isReady, setIsReady] = useState(false)
   const dotRef = useRef<HTMLDivElement | null>(null)
   const glowRef = useRef<HTMLDivElement | null>(null)
   const raf = useRef<number>()
-  const pos = useRef({ x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0, y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0 })
-  const target = useRef({ x: pos.current.x, y: pos.current.y })
+  const pos = useRef({ x: 0, y: 0 })
+  const target = useRef({ x: 0, y: 0 })
   const clicking = useRef(false)
   const scale = useRef(1)
   const scaleTarget = useRef(1)
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof document === 'undefined') return false
-    return document.documentElement.classList.contains('dark')
-  })
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
+    // Only run on client side
     setIsDesktop(hasHover())
+    setIsReady(true)
+    
+    // Set initial position safely
+    if (typeof window !== 'undefined') {
+      pos.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+      target.current = { x: pos.current.x, y: pos.current.y }
+    }
+    
+    // Check theme safely
+    if (typeof document !== 'undefined') {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    }
   }, [])
 
-  // Don't render cursor on mobile/touch devices
-  if (!isDesktop) return null
+  // Don't render cursor on mobile/touch devices or before ready
+  if (!isReady || !isDesktop) return null
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
