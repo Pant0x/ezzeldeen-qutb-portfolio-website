@@ -1,13 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Determine if we should show custom cursor.
-// Some desktop browsers/devices may report no hover; add width + pointer checks.
+// FORCE DESKTOP MODE FOR TESTING - ALWAYS SHOW CURSOR
 const detectDesktop = () => {
-  if (typeof window === 'undefined') return false
-  const mqHover = window.matchMedia('(hover: hover)').matches
-  const mqFinePointer = window.matchMedia('(pointer: fine)').matches
-  const wide = window.innerWidth >= 768
-  return (mqHover || mqFinePointer || wide)
+  console.log('[FORCE] Always returning true for testing!')
+  return true // FORCE ON
 }
 
 // Lightweight custom cursor with trailing glow (desktop only)
@@ -145,16 +141,14 @@ export const AnimatedCursor = () => {
     return () => observer.disconnect()
   }, [])
 
-  // Theme-based styling: brighten & enlarge in light mode for contrast
-  const sizeClass = isDark ? 'h-3 w-3' : 'h-4 w-4'
-  const dotColor = isDark
-    ? 'bg-neon-cyan shadow-[0_0_8px_2px_hsl(var(--neon-cyan)/0.9),0_0_18px_6px_hsl(var(--neon-purple)/0.35)]'
-    : 'bg-neon-purple shadow-[0_0_4px_2px_hsl(var(--neon-purple)/0.95),0_0_14px_6px_hsl(var(--neon-pink)/0.5),0_0_28px_10px_hsl(var(--neon-purple)/0.35)] ring-2 ring-white/60'
+  // SUPER VISIBLE TEST CURSOR - HUGE AND BRIGHT
+  const sizeClass = 'h-8 w-8' // Make it much bigger
+  const dotColor = 'bg-red-500 shadow-[0_0_30px_10px_red] border-4 border-yellow-400'
   const ringBase = 'pointer-events-none fixed top-0 left-0 z-[95] -translate-x-1/2 -translate-y-1/2 rounded-full border will-change-transform transition-opacity'
-  const ringStyle = isDark
-    ? 'h-7 w-7 border-neon-purple/60 shadow-[0_0_10px_2px_hsl(var(--neon-purple)/0.55),0_0_24px_10px_hsl(var(--neon-cyan)/0.35)]'
-    : 'h-8 w-8 border-neon-pink/60 shadow-[0_0_10px_2px_hsl(var(--neon-pink)/0.6),0_0_22px_8px_hsl(var(--neon-purple)/0.35)] backdrop-blur-[1px]'
-  const glowColor = isDark ? 'bg-neon-purple/25 h-16 w-16' : 'bg-neon-purple/40 h-20 w-20'
+  const ringStyle = 'h-16 w-16 border-4 border-blue-500 shadow-[0_0_50px_20px_blue]'
+  const glowColor = 'bg-green-500/80 h-32 w-32'
+  
+  console.log('[AnimatedCursor] styling applied:', { sizeClass, isDark })
 
   return (
     <>
