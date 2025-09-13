@@ -15,7 +15,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <PixelNavbar />
       <MobileSidebar />
-      <main className="space-y-6">
+      <main className="space-y-6 md:pt-20">
         <HeroSection />
         <Reveal><AboutSection /></Reveal>
         <Reveal delay={0.05}><WorkExperienceSection /></Reveal>
