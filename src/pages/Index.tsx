@@ -1,4 +1,5 @@
 import { PixelNavbar } from "@/components/PixelNavbar";
+import { MobileSidebar } from "@/components/MobileSidebar";
 import { HeroSection } from "@/components/portfolio/HeroSection";
 import { AboutSection } from "@/components/portfolio/AboutSection";
 import { WorkExperienceSection } from "@/components/portfolio/WorkExperienceSection";
@@ -13,6 +14,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <PixelNavbar />
+      <MobileSidebar />
       <main className="space-y-6">
         <HeroSection />
         <Reveal><AboutSection /></Reveal>

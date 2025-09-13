@@ -77,8 +77,8 @@ const SidebarProvider = React.forwardRef<
 
   // Adds a keyboard shortcut to toggle the sidebar (desktop only).
   React.useEffect(() => {
-    // Only enable keyboard shortcuts on devices with hover support (desktop)
-    if (!window.matchMedia('(hover: hover)').matches) return;
+    // Only enable keyboard shortcuts on desktop (screen width >= 1024px)
+    if (window.innerWidth < 1024) return;
     
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {

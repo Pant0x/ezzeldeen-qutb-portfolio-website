@@ -69,8 +69,8 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
-        // Only enable keyboard navigation on devices with hover support (desktop)
-        if (!window.matchMedia('(hover: hover)').matches) return;
+        // Only enable keyboard navigation on desktop (screen width >= 1024px)
+        if (window.innerWidth < 1024) return;
         
         if (event.key === "ArrowLeft") {
           event.preventDefault();

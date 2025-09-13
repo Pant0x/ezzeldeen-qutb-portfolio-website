@@ -27,9 +27,6 @@ export function HeroSection() {
 
   // Persistent "press any key" (keyboard only) auto-jump to About when near top
   useEffect(() => {
-    // Only enable keyboard navigation on devices with hover support (desktop)
-    if (!window.matchMedia('(hover: hover)').matches) return
-    
     const onKey = () => {
       if (window.scrollY > 100) return
       const about = document.querySelector('#about')
@@ -157,7 +154,7 @@ export function HeroSection() {
           </div>
         </TerminalSection>
 
-        <div className="font-mono text-xs text-muted-foreground animate-pulse hidden [@media(hover:hover)]:flex items-center justify-center gap-2">
+        <div className="font-mono text-xs text-muted-foreground animate-pulse hidden lg:flex items-center justify-center gap-2">
           <span className="text-neon-cyan">{'>'}</span>
           Press any key to enter the matrix...
           <span className="text-neon-purple animate-bounce">_</span>

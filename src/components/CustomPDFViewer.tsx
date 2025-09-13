@@ -21,8 +21,8 @@ export function CustomPDFViewer({ isOpen, onClose, pdfUrl, title = "Portfolio" }
     }
 
     if (isOpen) {
-      // Only enable keyboard shortcuts on devices with hover support (desktop)
-      if (window.matchMedia('(hover: hover)').matches) {
+      // Enable keyboard shortcuts on desktop (screen width >= 1024px)
+      if (window.innerWidth >= 1024) {
         document.addEventListener('keydown', handleKeyDown)
       }
       document.body.style.overflow = 'hidden'
