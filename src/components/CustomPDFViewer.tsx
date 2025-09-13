@@ -21,8 +21,8 @@ export function CustomPDFViewer({ isOpen, onClose, pdfUrl, title = "Portfolio" }
     }
 
     if (isOpen) {
-      // Enable keyboard shortcuts on desktop (screen width >= 1024px)
-      if (window.innerWidth >= 1024) {
+      // Enable keyboard shortcuts on desktop (screen width >= 768px)
+      if (window.innerWidth >= 768) {
         document.addEventListener('keydown', handleKeyDown)
       }
       document.body.style.overflow = 'hidden'

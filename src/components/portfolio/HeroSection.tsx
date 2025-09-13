@@ -154,7 +154,7 @@ export function HeroSection() {
           </div>
         </TerminalSection>
 
-        <div className="font-mono text-xs text-muted-foreground animate-pulse hidden lg:flex items-center justify-center gap-2">
+        <div className="font-mono text-xs text-muted-foreground animate-pulse hidden md:flex items-center justify-center gap-2">
           <span className="text-neon-cyan">{'>'}</span>
           Press any key to enter the matrix...
           <span className="text-neon-purple animate-bounce">_</span>
